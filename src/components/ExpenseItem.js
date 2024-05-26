@@ -13,10 +13,14 @@ const ExpenseItem = (props) => {
     };
 
     const decreaseAllocation = (name) => {
-        const newCost = (props.cost - 10); // Ensures cost doesn't go negative
+        const expense = {
+            name: name,
+            cost: 10,
+        };
+
         dispatch({
-          type: 'RED_EXPENSE', // Use RED_EXPENSE for decreasing allocation
-          payload: { name: props.cost, cost: newCost }, // Provide name and new cost
+            type: 'RED_EXPENSE',
+            payload: expense
         });
       };
 
@@ -37,8 +41,8 @@ const ExpenseItem = (props) => {
         <tr>
         <td>{props.name}</td>
         <td>{currency}{props.cost}</td>
-        <td><button onClick={event=> increaseAllocation(props.name)}>+</button></td>
-        <td><button onClick={event=> decreaseAllocation(props.name)}>-</button></td>
+        <td><button onClick={event=> increaseAllocation(props.name)} style={{border: "none"}}><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCT73aQ-YQYGcc1Mfl2AGujWABLF_mIKt78g&usqp=CAU' alt ="+" style = {{width: "20px", height: "20px"}} /></button></td>
+        <td><button onClick={event=> decreaseAllocation(props.name)} style={{border: "none"}}><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYDaG4wxRfqo_6V1WNDrMhdx37ds2AsuakBA&usqp=CAU' alt = "-" style = {{width: "20px", height: "20px"}} /></button></td>
         <td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
         </tr>
     );

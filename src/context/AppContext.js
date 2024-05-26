@@ -31,17 +31,17 @@ export const AppReducer = (state, action) => {
                 }
             }
             case 'RED_EXPENSE':
-                const red_expenses = state.expenses.map((currentExp) => {
-                  if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
-                    currentExp.cost = currentExp.cost - action.payload.cost; // Update cost directly
-                    return currentExp; // Return the updated expense object
-                  } else {
-                    return currentExp; // Return the original expense if cost is less than decrease amount
-                  }
-                });
+                const red_expenses = state.expenses.map((currentExp)=> {
+                    if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
+                        currentExp.cost =  currentExp.cost - action.payload.cost;
+                        budget = state.budget + action.payload.cost
+                    }
+                    return currentExp
+                })
+                action.type = "DONE";
                 return {
-                  ...state,
-                  expenses: [...red_expenses],
+                    ...state,
+                    expenses: [...red_expenses],
                 };
               
             case 'DELETE_EXPENSE':
